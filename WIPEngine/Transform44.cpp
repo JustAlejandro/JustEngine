@@ -27,19 +27,25 @@ Transform::Transform(int type = 0, float x = 0, float y = 0, float z = 0) {
 	return;
 }
 
+//Creates a default translation matrix
 Transform& Transform::Translate(float x, float y, float z) {
 	data.Identity();
 	data.mV[0][DIM - 1] = x;
 	data.mV[1][DIM - 1] = y;
 	data.mV[2][DIM - 1] = z;
+	return *this;
 }
+
+//Creates the default matrix that scales objects
 Transform& Transform::Scale(float x, float y, float z) {
 	data.Identity();
 	data.mV[0][0] = x;
 	data.mV[1][1] = y;
 	data.mV[2][2] = z;
+	return *this;
 }
 
+//Creates xyz rotation matrix
 Transform& Transform::Rotate(float x, float y, float z) {
 	float cx = cos(x);
 	float cy = cos(y);
@@ -64,8 +70,10 @@ Transform& Transform::Rotate(float x, float y, float z) {
 	data.mV[3][1] = 0;
 	data.mV[3][2] = 0;
 	data.mV[3][3] = 1;
+	return *this;
 }
 
+//Calls basic 4x4 multiplication
 Transform Transform::operator*(const Transform& other) const {
 	Transform toRet;
 	toRet.data = data * other.data;

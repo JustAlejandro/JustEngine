@@ -1,21 +1,20 @@
 #include "IvMatrix33.h"
 #include <iostream>
-int main() {
-	IvMatrix33 test,test2;
-	for (int i = 0; i < 9; i++)
-	{
-		test.mV[i] = i;
-		test2.mV[i] = i;
-	}
-	test = (test * test2);
+#include <SDL.h>
+#undef main
 
-	for (int i = 0; i < 3; i++)
+using namespace std;
+
+int main() {
+	if (SDL_Init(SDL_INIT_EVERYTHING) < 0)
 	{
-		for (int j = 0; j < 3; j++)
-		{
-			std::cout << test(j, i) << " ";
-		}
-		std::cout << std::endl;
+		cout << "SDL initialization failed. SDL Error: " << SDL_GetError();
 	}
-	std::system("pause");
+	else
+	{
+		cout << "SDL initialization succeeded!";
+	}
+
+	cin.get();
+	return 0;
 }

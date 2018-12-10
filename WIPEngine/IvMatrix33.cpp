@@ -22,7 +22,7 @@ IvMatrix33::operator*(const IvMatrix33& other) const {
 	for (int i = 0; i < DIM; i++) {
 		for (int j = 0; j < DIM; j++) {
 			for (int k = 0; k < DIM; k++) {
-				result[i][j] += mV[i][k] * other.mV[k][j];
+				result.mV[i][j] += mV[i][k] * other.mV[k][j];
 			}
 		}
 	}

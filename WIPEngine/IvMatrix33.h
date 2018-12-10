@@ -12,7 +12,6 @@ public:
 	IvMatrix33 operator+(const IvMatrix33& other) const;
 	IvMatrix33& operator=(const IvMatrix33& other);
 	IvMatrix33 operator*(const IvMatrix33& other) const;
-	inline float operator()(unsigned int row, unsigned int col);
 	float Determinant(const IvMatrix33) const;
 	float CrossProd(const IvMatrix33& other) const;
 };

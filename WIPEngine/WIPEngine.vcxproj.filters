@@ -16,6 +16,9 @@
     <Filter Include="Math">
       <UniqueIdentifier>{213bc0e8-7257-4df5-93b7-5f67d04fe0b8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="EngineObjects">
+      <UniqueIdentifier>{96798a97-7fd9-4d4b-89d5-457479115b81}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source.cpp">
@@ -24,22 +27,28 @@
     <ClCompile Include="IvMatrix33.cpp">
       <Filter>Math</Filter>
     </ClCompile>
-    <ClCompile Include="IvMatrix44.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Transform44.cpp">
       <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="IvMatrix44.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>EngineObjects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="IvMatrix33.h">
       <Filter>Math</Filter>
     </ClInclude>
-    <ClInclude Include="IvMatrix44.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Transform44.h">
       <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="IvMatrix44.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>EngineObjects</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

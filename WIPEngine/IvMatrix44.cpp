@@ -19,12 +19,38 @@ IvMatrix44 IvMatrix44::operator*(const IvMatrix44& other) const {
 	IvMatrix44 result;
 	for (int i = 0; i < DIM; i++) {
 		for (int j = 0; j < DIM; j++) {
+			result.mV[i][j] = 0;
 			for (int k = 0; k < DIM; k++) {
 				result.mV[i][j] += mV[i][k] * other.mV[k][j];
 			}
 		}
 	}
 	return result;
+}
+
+IvMatrix44& IvMatrix44::colSwap(int c1, int c2) {
+	float t0 = mV[0][c1];
+	float t1 = mV[1][c1];
+	float t2 = mV[2][c1];
+	float t3 = mV[3][c1];
+	mV[0][c1] = mV[0][c2];
+	mV[1][c1] = mV[1][c2];
+	mV[2][c1] = mV[2][c2];
+	mV[3][c1] = mV[3][c2];
+	mV[0][c2] = t0;
+	mV[1][c2] = t1;
+	mV[2][c2] = t2;
+	mV[3][c2] = t3;
+	return *this;
+}
+
+IvMatrix44& IvMatrix44::colScale(int col, float s) {
+	mV[0][col] *= s;
+	mV[1][col] *= s;
+	mV[2][col] *= s;
+	mV[3][col] *= s;
+
+	return *this;
 }
 
 //Equals for 4x4 matrix
@@ -73,4 +99,5 @@ IvMatrix44& IvMatrix44::Identity(void) {
 	mV[3][1] = 0;
 	mV[3][2] = 0;
 	mV[3][3] = 1;
+	return *this;
 }
