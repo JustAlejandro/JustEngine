@@ -1,6 +1,8 @@
 #include "Transform44.h"
 #include <cmath>
 #define DIM 4
+#define PI 3.14159265358979323846
+
 /*This is our default constructor that will make a Transform matrix
 	Input: Type of Matrix, x,y,z parameters
 		Type:	0 = Translate
@@ -9,7 +11,7 @@
 				Might be a better way to do this, but this uses the least amount of data/CPU time
 	This implementation defaults to the identity matrix if it's unsure there is no type selected
 */
-Transform::Transform(int type = 0, float x = 0, float y = 0, float z = 0) {
+Transform::Transform(int type, float x, float y, float z) {
 	switch (type)
 	{
 	case 0:
@@ -25,6 +27,11 @@ Transform::Transform(int type = 0, float x = 0, float y = 0, float z = 0) {
 		break;
 	}
 	return;
+}
+
+//Copy constructor
+Transform::Transform(const Transform & other) {
+	data = other.data;
 }
 
 //Creates a default translation matrix
@@ -47,14 +54,14 @@ Transform& Transform::Scale(float x, float y, float z) {
 
 //Creates xyz rotation matrix
 Transform& Transform::Rotate(float x, float y, float z) {
-	float cx = cos(x);
-	float cy = cos(y);
-	float cz = cos(z);
-	float sx = sin(x);
-	float sy = sin(y);
-	float sz = sin(z);
+	float cx = cos(x * PI / 180.0);
+	float cy = cos(y * PI / 180.0);
+	float cz = cos(z * PI / 180.0);
+	float sx = sin(x * PI / 180.0);
+	float sy = sin(y * PI / 180.0);
+	float sz = sin(z * PI / 180.0);
 
-	data.mV[0][0] = cy * cx;
+	data.mV[0][0] = cy * cz;
 	data.mV[0][1] = -1 * cy * sz;
 	data.mV[0][2] = sy;
 	data.mV[0][3] = 0;
@@ -78,4 +85,9 @@ Transform Transform::operator*(const Transform& other) const {
 	Transform toRet;
 	toRet.data = data * other.data;
 	return toRet;
+}
+
+Transform & Transform::operator=(const Transform & other) {
+	data = other.data;
+	return *this;
 }

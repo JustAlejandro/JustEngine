@@ -19,6 +19,9 @@
     <Filter Include="EngineObjects">
       <UniqueIdentifier>{96798a97-7fd9-4d4b-89d5-457479115b81}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Rendering">
+      <UniqueIdentifier>{f05b51bf-832c-4635-8920-2f0a0900c0a2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source.cpp">
@@ -36,6 +39,15 @@
     <ClCompile Include="Camera.cpp">
       <Filter>EngineObjects</Filter>
     </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="Model.cpp">
+      <Filter>Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="Vector4.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="IvMatrix33.h">
@@ -49,6 +61,21 @@
     </ClInclude>
     <ClInclude Include="Camera.h">
       <Filter>EngineObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Render.h">
+      <Filter>Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="Model.h">
+      <Filter>Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector4.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="SDLHelper.h">
+      <Filter>Rendering</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
