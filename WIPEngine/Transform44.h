@@ -19,9 +19,10 @@ class Transform {
 public:
 	IvMatrix44 data;
 
-	Transform(int type, float x, float y, float z);
+	Transform(const Transform& other);
+	Transform(int type = 0, float x = 0, float y = 0, float z = 0);
 	Transform operator*(const Transform& other) const;
-
+	Transform& operator=(const Transform& other);
 private:
 	Transform& Translate(float x, float y, float z);
 	Transform& Scale(float x, float y, float z);

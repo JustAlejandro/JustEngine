@@ -1,7 +1,6 @@
-
-
 #ifndef __IvMatrix44__h__
 #define __IvMatrix44__h__
+#include "Vector4.h"
 
 /*Defines the class IvMatrix44 as a 4x4 matrix
 */
@@ -17,11 +16,8 @@ public:
 	IvMatrix44& colScale(int col, float s);
 	float Determinant(const IvMatrix44) const;
 	float CrossProd(const IvMatrix44& other) const;
+	Vector4 operator*(const Vector4& other) const;
 
 };
-
-
-
-
 
 #endif
