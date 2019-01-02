@@ -22,13 +22,13 @@
     <Filter Include="Rendering">
       <UniqueIdentifier>{f05b51bf-832c-4635-8920-2f0a0900c0a2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game Framework">
+      <UniqueIdentifier>{da1f5537-4a35-480f-bd73-32ade26bf8c1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="IvMatrix33.cpp">
-      <Filter>Math</Filter>
     </ClCompile>
     <ClCompile Include="Transform44.cpp">
       <Filter>Math</Filter>
@@ -39,20 +39,23 @@
     <ClCompile Include="Camera.cpp">
       <Filter>EngineObjects</Filter>
     </ClCompile>
-    <ClCompile Include="Game.cpp">
-      <Filter>Rendering</Filter>
-    </ClCompile>
     <ClCompile Include="Model.cpp">
       <Filter>Rendering</Filter>
     </ClCompile>
     <ClCompile Include="Vector4.cpp">
       <Filter>Math</Filter>
     </ClCompile>
+    <ClCompile Include="Pong.cpp">
+      <Filter>Game Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="Render.cpp">
+      <Filter>Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Game Framework</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="IvMatrix33.h">
-      <Filter>Math</Filter>
-    </ClInclude>
     <ClInclude Include="Transform44.h">
       <Filter>Math</Filter>
     </ClInclude>
@@ -65,9 +68,6 @@
     <ClInclude Include="Render.h">
       <Filter>Rendering</Filter>
     </ClInclude>
-    <ClInclude Include="Game.h">
-      <Filter>Rendering</Filter>
-    </ClInclude>
     <ClInclude Include="Model.h">
       <Filter>Rendering</Filter>
     </ClInclude>
@@ -76,6 +76,18 @@
     </ClInclude>
     <ClInclude Include="SDLHelper.h">
       <Filter>Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="Pong.h">
+      <Filter>Game Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>Game Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Textures.h">
+      <Filter>Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="SDL\SDL.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

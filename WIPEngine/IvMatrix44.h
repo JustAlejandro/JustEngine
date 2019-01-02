@@ -15,7 +15,7 @@ public:
 	IvMatrix44& colSwap(int c1, int c2);
 	IvMatrix44& colScale(int col, float s);
 	float Determinant(const IvMatrix44) const;
-	float CrossProd(const IvMatrix44& other) const;
+	float DotProd(const IvMatrix44& other) const;
 	Vector4 operator*(const Vector4& other) const;
 
 };

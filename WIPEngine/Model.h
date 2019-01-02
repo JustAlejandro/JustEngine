@@ -2,6 +2,7 @@
 #define __Model__h__
 #include "Transform44.h"
 #include "IvMatrix44.h"
+#include <utility>
 #include <vector>
 #include <cmath>
 
@@ -17,20 +18,27 @@
 */
 class Model {
 public:
+	//We have different textures mapped out to different predefined integers that are mapped out in Textures.c
+	int texture;
 	int pointcount;
 	Transform position;
 	Transform scale;
-	//Holds the actual values of the rotation, realized that we need to keep these seperate from our rotation matrix in order to modify it
+	//Holds the actual values of the rotation, we need to keep these seperate from our rotation matrix in order to modify it
 	float axis[3];
 	Transform rotation;
 	IvMatrix44 mod2world;
 	std::vector<Vector4> points;
+	
+	//Here's where will define the texture coordinates for the game objects, still working on figuring out the implementation in my head
+	//In theory this will tie each coordinate with a part of a given texture, allowing us to map them onto the model later in rendering
+	std::vector<std::pair<int, int>> textureCoord;
+	
 	//These parameters are used for culling
 	Vector4 center;
 	float radius;
 	std::vector<Vector4> bounds;
 
-	Model(float vertices[][4], int count, float pos[3], float rot[3], float sca[3]);
+	Model(float vertices[][3], unsigned int tex[][2], int count, int texIndex, float pos[3], float rot[3], float sca[3]);
 	Model operator=(const Model& other);
 	Model(const Model& other);
 	//Changes position to new 3 coordinates

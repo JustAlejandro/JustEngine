@@ -73,7 +73,7 @@ float IvMatrix44::Determinant(const IvMatrix44) const {
 	return res;
 }
 
-float IvMatrix44::CrossProd(const IvMatrix44& other) const {
+float IvMatrix44::DotProd(const IvMatrix44& other) const {
 	float res = 0;
 	for (int i = 0; i < DIM; i++)
 	{

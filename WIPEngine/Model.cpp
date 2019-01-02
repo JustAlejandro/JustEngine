@@ -2,13 +2,16 @@
 #include "Transform44.h"
 #include <vector>
 #include <cmath>
+#define ROOTTWOOVERTWO 0.707107
 
 //Constructor for models
-Model::Model(float vertices[][4], int count, float pos[3], float rot[3], float sca[3]) : position(0,pos[0],pos[1],pos[2]), rotation(2,rot[0],rot[1],rot[2]), scale(1,sca[0],sca[1],sca[2]) {
+Model::Model(float vertices[][3], unsigned int tex[][2], int count, int texIndex, float pos[3], float rot[3], float sca[3]) : position(0, pos[0], pos[1], pos[2]), rotation(2, rot[0], rot[1], rot[2]), scale(1, sca[0], sca[1], sca[2]) {
 	//Adds to the vector as long as we have points to add to the model
 	for (int i = 0; i < count; i++) {
-		points.push_back(Vector4(vertices[i][0], vertices[i][1], vertices[i][2], vertices[i][3]));
+		points.push_back(Vector4(vertices[i][0], vertices[i][1], vertices[i][2], 1));
+		textureCoord.push_back(std::make_pair(tex[i][0],tex[i][1]));
 	}
+	texture = texIndex;
 	pointcount = count;
 	axis[0] = rot[0];
 	axis[1] = rot[1];
@@ -16,9 +19,12 @@ Model::Model(float vertices[][4], int count, float pos[3], float rot[3], float s
 	mod2world = position.data * rotation.data * scale.data;
 
 	center = pointAvg(points);
-	radius = maxDist(center, points);
+	//note, radius actually holds the radius * sqrt(2) / 2 so that way the bounding box has the same radius as the actual object
+	//If the bounding box was an approximation of a sqhere then we could just use the actual radius
+	radius = maxDist(center, points) * ROOTTWOOVERTWO;
 
 	//This creates the bounding box for culling later
+	bounds.push_back(Vector4(center.mV[0],			center.mV[1],		   center.mV[2],		  center.mV[3]));
 	bounds.push_back(Vector4(center.mV[0] + radius, center.mV[1] + radius, center.mV[2] + radius, center.mV[3]));
 	bounds.push_back(Vector4(center.mV[0] - radius, center.mV[1] - radius, center.mV[2] + radius, center.mV[3]));
 	bounds.push_back(Vector4(center.mV[0] + radius, center.mV[1] - radius, center.mV[2] + radius, center.mV[3]));
@@ -31,13 +37,18 @@ Model::Model(float vertices[][4], int count, float pos[3], float rot[3], float s
 
 }
 
+//Copy Assignment
 Model Model::operator=(const Model & other) {
+	texture = other.texture;
 	pointcount = other.pointcount;
 	position = other.position;
 	scale = other.scale;
 	rotation = other.rotation;
+	points.clear();
+	textureCoord.clear();
 	for (int i = 0; i < other.points.size(); i++) {
-		points.push_back(Vector4(other.bounds[i]));
+		points.push_back(Vector4(other.points[i]));
+		textureCoord.push_back(other.textureCoord[i]);
 	}
 	axis[0] = other.axis[0];
 	axis[1] = other.axis[1];
@@ -53,14 +64,18 @@ Model Model::operator=(const Model & other) {
 	return *this;
 }
 
-//Creates a copy of another model
+//Copy Declaration
 Model::Model(const Model& other) : position(other.position),rotation(other.rotation),scale(other.scale) {
+	texture = other.texture;
 	axis[0] = other.axis[0];
 	axis[1] = other.axis[1];
 	axis[2] = other.axis[2];
 	mod2world = other.mod2world;
+	points.clear();
+	textureCoord.clear();
 	for (int i = 0; i < other.pointcount; i++) {
 		points.push_back(other.points[i]);
+		textureCoord.push_back(other.textureCoord[i]);
 	}
 	pointcount = other.pointcount;
 
