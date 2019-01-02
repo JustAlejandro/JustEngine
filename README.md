@@ -1,5 +1,7 @@
 # JustEngine
  A 3D renderer using CPU Instructions and SDL for display and keyboard input handling
+ 
+ To run the program just download and unzip the JustEngine.zip file in this project
 
 
 ### Games:
