@@ -25,15 +25,27 @@ void Camera::move(float x, float y, float z) {
 	position.data.mV[0][3] += x;
 	position.data.mV[1][3] += y;
 	position.data.mV[2][3] += z;
+	view2world = v2wGen();
+	world2view = w2vGen();
 }
 
 //Changes the rotation of the camera to x,y,z angles
-//Note: should probably add in a way to increase the rotation rather than completely change it
 void Camera::rotate(float x, float y, float z) {
 	axis[0] = x;
 	axis[1] = y;
 	axis[2] = z;
 	rotation = Transform(2, x, y, z);
+	view2world = v2wGen();
+	world2view = w2vGen();
+}
+
+void Camera::spin(float x, float y, float z) {
+	axis[0] += x;
+	axis[1] += y;
+	axis[2] += z;
+	rotation = Transform(2, axis[0], axis[1], axis[2]);
+	view2world = v2wGen();
+	world2view = w2vGen();
 }
 
 //Repositions the camera entirely rather than moving
@@ -41,6 +53,8 @@ void Camera::warp(float x, float y, float z) {
 	position.data.mV[0][3] = x;
 	position.data.mV[1][3] = y;
 	position.data.mV[2][3] = z;
+	view2world = v2wGen();
+	world2view = w2vGen();
 }
 
 //Generates the world2view matrix from the view2world matrix
@@ -48,9 +62,9 @@ IvMatrix44 Camera::w2vGen() {
 	IvMatrix44 world2view = view2world;
 	//Form of world to view is inverse of upper right triangular 3x3 which is the same as transpose since it's an orthogonal matrix
 	transposeUpperRight(world2view);
-	world2view.mV[0][3] = world2view.mV[0][0] * world2view.mV[0][3] + world2view.mV[0][1] * world2view.mV[1][3] + world2view.mV[0][2] * world2view.mV[2][3];
-	world2view.mV[1][3] = world2view.mV[1][0] * world2view.mV[0][3] + world2view.mV[1][1] * world2view.mV[1][3] + world2view.mV[1][2] * world2view.mV[2][3];
-	world2view.mV[2][3] = world2view.mV[2][0] * world2view.mV[0][3] + world2view.mV[2][1] * world2view.mV[1][3] + world2view.mV[2][2] * world2view.mV[2][3];
+	world2view.mV[0][3] = -1 * (world2view.mV[0][0] * position.data.mV[0][3] + world2view.mV[0][1] * position.data.mV[1][3] + world2view.mV[0][2] * position.data.mV[2][3]);
+	world2view.mV[1][3] = -1 * (world2view.mV[1][0] * position.data.mV[0][3] + world2view.mV[1][1] * position.data.mV[1][3] + world2view.mV[1][2] * position.data.mV[2][3]);
+	world2view.mV[2][3] = -1 * (world2view.mV[2][0] * position.data.mV[0][3] + world2view.mV[2][1] * position.data.mV[1][3] + world2view.mV[2][2] * position.data.mV[2][3]);
 	
 	return world2view;
 }

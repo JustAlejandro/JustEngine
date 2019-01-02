@@ -8,7 +8,10 @@ public:
 
 	Vector4(float x = 0, float y = 0 , float z = 0, float w = 0);
 	Vector4 operator+(const Vector4& other) const;
-	Vector4& normalize();
+	Vector4 operator-(const Vector4 & other) const;
+	Vector4 operator/(const float div) const;
+	Vector4 operator*(const float div) const;
+	Vector4& homDiv();
 };
 
 #endif

@@ -16,9 +16,10 @@ public:
 	IvMatrix44 perspective;
 
 	//Have to pass pos, and rot parameters for construction
-	Camera(float fov = 90, float aspect = 1920.0/1080.0, float near = 1, float far = 10, float x = 0, float y = 0, float z = 0, float xr = 0, float yr = 0, float zr = 0);
+	Camera(float fov = 70, float aspect = 1920.0/1080.0, float near = 10, float far = 80, float x = 0, float y = 0, float z = 0, float xr = 0, float yr = 0, float zr = 0);
 	void move(float x, float y, float z);
 	void rotate(float x, float y, float z);
+	void spin(float x, float y, float z);
 	void warp(float x, float y, float z);
 
 private:
